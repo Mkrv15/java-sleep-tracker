@@ -12,4 +12,5 @@ public class SleepingSession {
         this.timeWakeUp = timeWakeUp;
         this.assessment = assessment;
     }
+
 }
