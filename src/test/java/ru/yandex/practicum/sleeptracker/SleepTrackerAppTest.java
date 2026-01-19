@@ -82,8 +82,8 @@ public class SleepTrackerAppTest {
         sleepTrackerApp.addFunction(maximumDurationSleepSession);
         List<SleepAnalysisResult> results = sleepTrackerApp.executeFunctions(sessions);
         Assertions.assertEquals(1, results.size());
-        Assertions.assertEquals("Максимальная продолжительность сессии (в минутах): 0"
-                , results.getFirst().toString());
+        Assertions.assertEquals("Максимальная продолжительность сессии (в минутах): 0",
+                results.getFirst().toString());
     }
 
     @Test
@@ -92,14 +92,13 @@ public class SleepTrackerAppTest {
         LocalDateTime time = LocalDateTime.of(2025, 2, 2, 12, 0);
 
         for (int i = 1; i <= 5; i++) {
-            sessions.add(new SleepingSession(time
-                    , time.plusMinutes(i * 10), SleepAssessment.BAD));
+            sessions.add(new SleepingSession(time, time.plusMinutes(i * 10), SleepAssessment.BAD));
         }
         sleepTrackerApp.addFunction(maximumDurationSleepSession);
         List<SleepAnalysisResult> results = sleepTrackerApp.executeFunctions(sessions);
         Assertions.assertEquals(1, results.size());
-        Assertions.assertEquals("Максимальная продолжительность сессии (в минутах): 50"
-                , results.getFirst().toString());
+        Assertions.assertEquals("Максимальная продолжительность сессии (в минутах): 50",
+                results.getFirst().toString());
     }
 
     @Test
@@ -108,8 +107,8 @@ public class SleepTrackerAppTest {
         sleepTrackerApp.addFunction(minimumDurationSleepSession);
         List<SleepAnalysisResult> results = sleepTrackerApp.executeFunctions(sessions);
         Assertions.assertEquals(1, results.size());
-        Assertions.assertEquals("Минимальная продолжительность сессии (в минутах): 0"
-                , results.getFirst().toString());
+        Assertions.assertEquals("Минимальная продолжительность сессии (в минутах): 0",
+                results.getFirst().toString());
     }
 
     @Test
@@ -118,14 +117,13 @@ public class SleepTrackerAppTest {
         LocalDateTime time = LocalDateTime.of(2025, 2, 2, 12, 0);
 
         for (int i = 1; i <= 5; i++) {
-            sessions.add(new SleepingSession(time
-                    , time.plusMinutes(i * 10), SleepAssessment.BAD));
+            sessions.add(new SleepingSession(time, time.plusMinutes(i * 10), SleepAssessment.BAD));
         }
         sleepTrackerApp.addFunction(minimumDurationSleepSession);
         List<SleepAnalysisResult> results = sleepTrackerApp.executeFunctions(sessions);
         Assertions.assertEquals(1, results.size());
-        Assertions.assertEquals("Минимальная продолжительность сессии (в минутах): 10"
-                , results.getFirst().toString());
+        Assertions.assertEquals("Минимальная продолжительность сессии (в минутах): 10",
+                results.getFirst().toString());
     }
 
     @Test
@@ -134,8 +132,8 @@ public class SleepTrackerAppTest {
         sleepTrackerApp.addFunction(averageDurationSleepSession);
         List<SleepAnalysisResult> results = sleepTrackerApp.executeFunctions(sessions);
         Assertions.assertEquals(1, results.size());
-        Assertions.assertEquals("Средняя продолжительность сессии (в минутах): 0"
-                , results.getFirst().toString());
+        Assertions.assertEquals("Средняя продолжительность сессии (в минутах): 0",
+                results.getFirst().toString());
     }
 
     @Test
@@ -144,16 +142,15 @@ public class SleepTrackerAppTest {
         LocalDateTime time = LocalDateTime.of(2025, 2, 2, 12, 0);
         int averageDuration = 0;
         for (int i = 1; i <= 5; i++) {
-            sessions.add(new SleepingSession(time
-                    , time.plusMinutes(i * 10), SleepAssessment.BAD));
+            sessions.add(new SleepingSession(time, time.plusMinutes(i * 10), SleepAssessment.BAD));
             averageDuration = averageDuration + i * 10;
         }
         averageDuration = averageDuration / sessions.size();
         sleepTrackerApp.addFunction(averageDurationSleepSession);
         List<SleepAnalysisResult> results = sleepTrackerApp.executeFunctions(sessions);
         Assertions.assertEquals(1, results.size());
-        Assertions.assertEquals("Средняя продолжительность сессии (в минутах): " + averageDuration
-                , results.getFirst().toString());
+        Assertions.assertEquals("Средняя продолжительность сессии (в минутах): " + averageDuration,
+                results.getFirst().toString());
     }
 
     @Test
