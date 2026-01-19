@@ -13,10 +13,11 @@ import java.util.stream.Collectors;
 public class SleepTrackerApp {
     private List<SleepAnalysisFunction> functions = new ArrayList<>();
     private static List<SleepingSession> sleepingSessions = new ArrayList<>();
+
     public static void main(String[] args) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(args[0]))){
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(args[0]))) {
             bufferedReader.lines()
                     .map(s -> s.split(";"))
                     .filter(strings -> strings.length == 3)
@@ -30,21 +31,24 @@ public class SleepTrackerApp {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        SleepTrackerApp sleepTrackerApp = new SleepTrackerApp();
-//        sleepTrackerApp.addFunction(new CountOfSleepSessions());
-//        sleepTrackerApp.addFunction(new MinimumDurationSleepSession());
-//        sleepTrackerApp.addFunction(new MaximumDurationSleepSession());
-//        sleepTrackerApp.addFunction(new AverageDurationSleepSession());
-//        sleepTrackerApp.addFunction(new CountOfBadSleepSessions());
-//        sleepTrackerApp.addFunction(new CountOfSleeplessNights());
-//        System.out.println(sleepTrackerApp.executeFunctions(sleepingSessions));
+        SleepTrackerApp sleepTrackerApp = new SleepTrackerApp();
+        sleepTrackerApp.addFunction(new CountOfSleepSessions());
+        sleepTrackerApp.addFunction(new MinimumDurationSleepSession());
+        sleepTrackerApp.addFunction(new MaximumDurationSleepSession());
+        sleepTrackerApp.addFunction(new AverageDurationSleepSession());
+        sleepTrackerApp.addFunction(new CountOfBadSleepSessions());
+        sleepTrackerApp.addFunction(new CountOfSleeplessNights());
+        sleepTrackerApp.addFunction(new UserClassifier());
+        sleepTrackerApp.executeFunctions(sleepingSessions).forEach(System.out::println);
+
 
     }
 
-    public void addFunction(SleepAnalysisFunction function){
+    public void addFunction(SleepAnalysisFunction function) {
         functions.add(function);
     }
-    public List<SleepAnalysisResult> executeFunctions(List<SleepingSession> sleepingSessions){
+
+    public List<SleepAnalysisResult> executeFunctions(List<SleepingSession> sleepingSessions) {
         List<SleepAnalysisResult> results = functions.stream()
                 .map(function -> function.apply(sleepingSessions))
                 .collect(Collectors.toList());
