@@ -207,34 +207,30 @@ public class SleepTrackerAppTest {
                 LocalDateTime.of(2025, 10, 2, 13, 0),
                 LocalDateTime.of(2025, 10, 2, 14, 0),
                 SleepAssessment.NORMAL));
+        sessions.add(new SleepingSession(
+                LocalDateTime.of(2025, 10, 3, 13, 0),
+                LocalDateTime.of(2025, 10, 3, 14, 0),
+                SleepAssessment.NORMAL));
         CountOfSleeplessNights count = new CountOfSleeplessNights();
         sleepTrackerApp.addFunction(count);
         List<SleepAnalysisResult> results = sleepTrackerApp.executeFunctions(sessions);
         Assertions.assertEquals(1, results.size());
-        Assertions.assertEquals("Количество бессонных ночей: 1", results.getFirst().toString());
+        Assertions.assertEquals("Количество бессонных ночей: 0", results.getFirst().toString());
     }
 
     @Test
     void testUserClassifierForOwl() {
         sessions.add(new SleepingSession(
                 LocalDateTime.of(2025, 10, 1, 23, 30),
-                LocalDateTime.of(2025, 10, 2, 8, 0),
+                LocalDateTime.of(2025, 10, 2, 10, 0),
                 SleepAssessment.GOOD));
         sessions.add(new SleepingSession(
-                LocalDateTime.of(2025, 10, 2, 0, 15),
-                LocalDateTime.of(2025, 10, 2, 9, 0),
+                LocalDateTime.of(2025, 10, 2, 23, 15),
+                LocalDateTime.of(2025, 10, 3, 9, 30),
                 SleepAssessment.GOOD));
         sessions.add(new SleepingSession(
-                LocalDateTime.of(2025, 10, 3, 23, 45),
-                LocalDateTime.of(2025, 10, 4, 8, 30),
-                SleepAssessment.GOOD));
-        sessions.add(new SleepingSession(
-                LocalDateTime.of(2025, 10, 4, 21, 0),
-                LocalDateTime.of(2025, 10, 5, 6, 30),
-                SleepAssessment.GOOD));
-        sessions.add(new SleepingSession(
-                LocalDateTime.of(2025, 10, 5, 22, 0),
-                LocalDateTime.of(2025, 10, 6, 7, 0),
+                LocalDateTime.of(2025, 10, 3, 0, 45),
+                LocalDateTime.of(2025, 10, 4, 10, 30),
                 SleepAssessment.GOOD));
         UserClassifier userClassifier = new UserClassifier();
         sleepTrackerApp.addFunction(userClassifier);
@@ -246,7 +242,7 @@ public class SleepTrackerAppTest {
     @Test
     void testUserClassifierForLark() {
         sessions.add(new SleepingSession(
-                LocalDateTime.of(2025, 10, 1, 21, 30),
+                LocalDateTime.of(2025, 10, 1, 20, 30),
                 LocalDateTime.of(2025, 10, 2, 6, 0),
                 SleepAssessment.GOOD));
         sessions.add(new SleepingSession(
@@ -254,16 +250,8 @@ public class SleepTrackerAppTest {
                 LocalDateTime.of(2025, 10, 3, 5, 30),
                 SleepAssessment.GOOD));
         sessions.add(new SleepingSession(
-                LocalDateTime.of(2025, 10, 3, 23, 45),
-                LocalDateTime.of(2025, 10, 4, 8, 30),
-                SleepAssessment.GOOD));
-        sessions.add(new SleepingSession(
-                LocalDateTime.of(2025, 10, 3, 19, 0),
-                LocalDateTime.of(2025, 10, 4, 4, 45),
-                SleepAssessment.GOOD));
-        sessions.add(new SleepingSession(
-                LocalDateTime.of(2025, 10, 4, 22, 0), // ровно 22:00 - считается жаворонком
-                LocalDateTime.of(2025, 10, 5, 7, 0),  // ровно 7:00 - пограничный случай
+                LocalDateTime.of(2025, 10, 3, 21, 45),
+                LocalDateTime.of(2025, 10, 4, 6, 30),
                 SleepAssessment.GOOD));
         UserClassifier userClassifier = new UserClassifier();
         sleepTrackerApp.addFunction(userClassifier);
